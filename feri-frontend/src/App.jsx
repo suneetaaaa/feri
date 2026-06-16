@@ -1,12 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useAuthStore, useCartStore, useWishlistStore } from './store'
-
-// Layout
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
-
-// Pages
 import LandingPage from './pages/LandingPage'
 import LoginPage from './pages/auth/LoginPage'
 import RegisterPage from './pages/auth/RegisterPage'
@@ -23,6 +19,11 @@ import SellerOnboardPage from './pages/seller/SellerOnboardPage'
 import SellerDashboardPage from './pages/seller/SellerDashboardPage'
 import AddProductPage from './pages/seller/AddProductPage'
 import AdminDashboardPage from './pages/admin/AdminDashboardPage'
+import AboutPage from './pages/AboutPage'
+import ContactPage from './pages/ContactPage'
+import SustainabilityPage from './pages/SustainabilityPage'
+import PrivacyPage from './pages/PrivacyPage'
+import TermsPage from './pages/TermsPage'
 
 const ProtectedRoute = ({ children, role }) => {
   const { isLoggedIn, user } = useAuthStore()
@@ -35,14 +36,9 @@ export default function App() {
   const { isLoggedIn } = useAuthStore()
   const { fetchCart } = useCartStore()
   const { fetchWishlist } = useWishlistStore()
-
   useEffect(() => {
-    if (isLoggedIn()) {
-      fetchCart()
-      fetchWishlist()
-    }
+    if (isLoggedIn()) { fetchCart(); fetchWishlist() }
   }, [])
-
   return (
     <div className="min-h-screen bg-parchment flex flex-col">
       <Navbar />
@@ -54,21 +50,20 @@ export default function App() {
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:id" element={<ProductDetailPage />} />
           <Route path="/sellers/:id" element={<SellerProfilePage />} />
-
-          {/* Buyer */}
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/sustainability" element={<SustainabilityPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
           <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
           <Route path="/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
           <Route path="/orders" element={<ProtectedRoute><OrderHistoryPage /></ProtectedRoute>} />
           <Route path="/orders/:id" element={<ProtectedRoute><OrderDetailPage /></ProtectedRoute>} />
           <Route path="/payment/success" element={<ProtectedRoute><OrderSuccessPage /></ProtectedRoute>} />
           <Route path="/wishlist" element={<ProtectedRoute><WishlistPage /></ProtectedRoute>} />
-
-          {/* Seller */}
           <Route path="/sell/onboard" element={<ProtectedRoute><SellerOnboardPage /></ProtectedRoute>} />
           <Route path="/seller/dashboard" element={<ProtectedRoute role="SELLER"><SellerDashboardPage /></ProtectedRoute>} />
           <Route path="/seller/products/new" element={<ProtectedRoute role="SELLER"><AddProductPage /></ProtectedRoute>} />
-
-          {/* Admin */}
           <Route path="/admin" element={<ProtectedRoute role="ADMIN"><AdminDashboardPage /></ProtectedRoute>} />
         </Routes>
       </main>
