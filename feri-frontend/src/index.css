@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-parchment text-ink font-body antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+  * { box-sizing: border-box; }
+  ::selection { background: #B8860B22; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-ink text-white font-body font-medium px-6 py-3 rounded-xl
+           transition-all duration-200 hover:bg-noir hover:shadow-card-hover
+           active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply border border-ink text-ink font-body font-medium px-6 py-3 rounded-xl
+           transition-all duration-200 hover:bg-ink hover:text-white
+           active:scale-[0.98];
+  }
+  .btn-gold {
+    @apply bg-gold text-white font-body font-medium px-6 py-3 rounded-xl
+           transition-all duration-200 hover:bg-gold-muted hover:shadow-card-hover
+           active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-ghost {
+    @apply text-ink font-body font-medium px-4 py-2 rounded-lg
+           transition-all duration-200 hover:bg-ink/5;
+  }
+
+  .input-field {
+    @apply w-full border border-border bg-white rounded-xl px-4 py-3
+           font-body text-ink placeholder:text-muted/60
+           focus:outline-none focus:ring-2 focus:ring-ink/20 focus:border-ink
+           transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-card border border-border/50
+           transition-all duration-300 hover:shadow-card-hover;
+  }
+
+  .trust-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full
+           text-xs font-medium font-body;
+  }
+
+  .section-label {
+    @apply font-body text-xs font-semibold uppercase tracking-[0.12em] text-muted;
+  }
+
+  .container-page {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .product-card {
+    @apply bg-white rounded-2xl overflow-hidden shadow-card border border-border/40
+           transition-all duration-300 hover:shadow-card-hover hover:-translate-y-0.5 cursor-pointer;
+  }
+
+  .condition-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium font-body;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #D4C9B8; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #B8A898; }
+
+/* Cormorant numerals */
+.font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
